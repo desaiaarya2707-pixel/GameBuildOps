@@ -16,13 +16,41 @@ jobs:
       - name: GameBuildOps is running
         run: echo "GameBuildOps pipeline started!"
 
-      - name: Check Unity project
+      - name: Check Unity project structure
         run: |
           echo "Checking Unity project structure..."
+
           test -d Assets
           test -d Packages
           test -d ProjectSettings
+
           echo "Unity project structure looks good!"
 
+      - name: Check Unity project version
+        run: |
+          echo "Checking Unity version..."
+
+          test -f ProjectSettings/ProjectVersion.txt
+
+          grep -q "m_EditorVersion:" ProjectSettings/ProjectVersion.txt
+
+          echo "Unity version file found."
+          cat ProjectSettings/ProjectVersion.txt
+
+      - name: Check GameBuildOps tests
+        run: |
+          echo "Checking automated test files..."
+
+          test -f Assets/Tests/GameBuildOpsTests.cs
+          test -f Assets/Tests/Tests.asmdef
+
+          grep -q "\[Test\]" Assets/Tests/GameBuildOpsTests.cs
+          grep -q "Assert.AreEqual" Assets/Tests/GameBuildOpsTests.cs
+
+          echo "GameBuildOps test files look good!"
+
       - name: Pipeline successful
-        run: echo "GameBuildOps pipeline completed successfully!"
+        run: |
+          echo "================================"
+          echo "GameBuildOps CI PASSED!"
+          echo "================================"
