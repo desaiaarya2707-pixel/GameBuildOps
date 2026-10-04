@@ -1,10 +1,12 @@
 name: GameBuildOps
-
 on:
   push:
     branches:
       - main
 
+  pull_request:
+    branches:
+      - main
 jobs:
   pipeline-check:
     runs-on: ubuntu-latest
