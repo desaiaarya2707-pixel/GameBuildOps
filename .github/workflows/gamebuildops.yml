@@ -48,6 +48,16 @@ jobs:
 
           echo "GameBuildOps test files look good!"
 
+      - name: Build GameBuildOps Docker image
+        run: |
+          echo "Building Docker validation image..."
+          docker build -t gamebuildops-validator .
+
+      - name: Run GameBuildOps Docker container
+        run: |
+          echo "Running Docker validation..."
+          docker run --rm gamebuildops-validator
+
       - name: Pipeline successful
         run: |
           echo "================================"
