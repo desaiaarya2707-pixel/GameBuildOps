@@ -1,0 +1,28 @@
+name: GameBuildOps
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  pipeline-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout GameBuildOps
+        uses: actions/checkout@v4
+
+      - name: GameBuildOps is running
+        run: echo "GameBuildOps pipeline started!"
+
+      - name: Check Unity project
+        run: |
+          echo "Checking Unity project structure..."
+          test -d Assets
+          test -d Packages
+          test -d ProjectSettings
+          echo "Unity project structure looks good!"
+
+      - name: Pipeline successful
+        run: echo "GameBuildOps pipeline completed successfully!"
