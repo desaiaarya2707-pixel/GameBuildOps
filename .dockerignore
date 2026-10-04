@@ -1,0 +1,11 @@
+Library/
+Temp/
+Logs/
+obj/
+UserSettings/
+.vs/
+.vscode/
+.git/
+.gitignore
+*.csproj
+*.sln
